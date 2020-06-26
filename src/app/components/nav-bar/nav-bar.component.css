@@ -1,0 +1,25 @@
+.navbar-central {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+mat-form-field.mat-form-field {
+    font-size: 12px;
+}
+
+.logo-user {
+    border-radius: 15%!important;
+}

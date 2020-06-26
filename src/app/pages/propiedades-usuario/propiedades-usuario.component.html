@@ -1,0 +1,43 @@
+<div class="container-md card">
+    <br>
+    <h4>Mis propiedades</h4>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <div class="card" style="width: 17rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Detalle</h5>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <ul class="list-unstyled">
+                <li *ngFor="let propiedad of propiedades$ | async" class="media">
+                    <svg class="bd-placeholder-img mr-3" width="64" height="64" xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                        aria-label="Placeholder: 64x64">
+                        <title>Imagen</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
+                            dy=".3em">64x64</text>
+                    </svg>
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-10">
+                                <h5 class="mt-0 mb-1">{{propiedad.titulo}}</h5>
+                                {{propiedad.descripcion}}
+                            </div>
+                            <div class="col-2">
+                                <!-- <button color="primary" type="submit" mat-icon-button (click)="alquilarPropiedad(propiedad.id)">
+                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                </button> -->
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+</div>

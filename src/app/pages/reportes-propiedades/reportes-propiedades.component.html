@@ -1,0 +1,110 @@
+<div class="container-md">
+    <dx-chart id="chart" [dataSource]="dataSource" title="Reporte propiedades por ciudad" palette="Harmony Light"
+        [valueAxis]="[{
+        name: 'frequency',
+        position: 'left',
+        tickInterval: 300
+    }, {
+        name: 'percentage',
+        position: 'right',
+        showZero: true,
+        label: {
+            customizeText: customizeLabelText
+        },
+        constantLines: [{
+            value: 80,
+            color: '#fc3535',
+            dashStyle: 'dash',
+            width: 2,
+            label: { visible: false }
+        }],
+        tickInterval: 20,
+        valueMarginsEnabled: false
+    }]">
+        <dxo-argument-axis>
+            <dxo-label overlappingBehavior="stagger"></dxo-label>
+        </dxo-argument-axis>
+        <dxo-tooltip [enabled]="true" [shared]="true" [customizeTooltip]="customizeTooltip">
+        </dxo-tooltip>
+        <dxo-common-series-settings argumentField="nombre_ciudad">
+        </dxo-common-series-settings>
+        <dxi-series type="bar" valueField="cantidad_propiedades" axis="frequency" name="Propiedades" color="#fac29a">
+        </dxi-series>
+        <dxo-legend verticalAlignment="top" horizontalAlignment="center">
+        </dxo-legend>
+    </dx-chart>
+</div>
+<br>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<br>
+<div class="container-md">
+    <div class="row">
+        <div class="col-2">
+            <div class="card" style="width: 17rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Filtros</h5>
+                    <form>
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Fecha desde</mat-label>
+                                <input matInput [matDatepicker]="dkFechaDesde" #valFechaDesde>
+                                <mat-datepicker-toggle matSuffix [for]="dkFechaDesde"></mat-datepicker-toggle>
+                                <mat-datepicker #dkFechaDesde></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Fecha hasta</mat-label>
+                                <input matInput [matDatepicker]="dkFechaHasta" #valFechaHasta>
+                                <mat-datepicker-toggle matSuffix [for]="dkFechaHasta"></mat-datepicker-toggle>
+                                <mat-datepicker #dkFechaHasta></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <button type="button" mat-icon-button
+                            (click)="propiedadesAlquiladasPorFecha(valFechaDesde.value,valFechaHasta.value)">
+                            <fa-icon [icon]="faSearch" class="fa-2x"></fa-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <dx-chart id="chart" [dataSource]="dataSourcePorFecha" title="Reporte propiedades por ciudad"
+                palette="Harmony Light" [valueAxis]="[{
+                                                        name: 'frequency',
+                                                        position: 'left',
+                                                        tickInterval: 300
+                                                    }, {
+                                                        name: 'percentage',
+                                                        position: 'right',
+                                                        showZero: true,
+                                                        label: {
+                                                            customizeText: customizeLabelText
+                                                        },
+                                                        constantLines: [{
+                                                            value: 80,
+                                                            color: '#fc3535',
+                                                            dashStyle: 'dash',
+                                                            width: 2,
+                                                            label: { visible: false }
+                                                        }],
+                                                        tickInterval: 20,
+                                                        valueMarginsEnabled: false
+                                                    }]">
+                <dxo-argument-axis>
+                    <dxo-label overlappingBehavior="stagger"></dxo-label>
+                </dxo-argument-axis>
+                <dxo-tooltip [enabled]="true" [shared]="true" [customizeTooltip]="customizeTooltip">
+                </dxo-tooltip>
+                <dxo-common-series-settings argumentField="nombre_ciudad">
+                </dxo-common-series-settings>
+                <dxi-series type="bar" valueField="cantidad_propiedades" axis="frequency" name="Propiedades"
+                    color="#fac29a">
+                </dxi-series>
+                <dxo-legend verticalAlignment="top" horizontalAlignment="center">
+                </dxo-legend>
+            </dx-chart>
+        </div>
+    </div>
+</div>

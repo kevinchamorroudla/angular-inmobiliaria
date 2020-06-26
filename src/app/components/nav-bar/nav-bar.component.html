@@ -1,0 +1,104 @@
+<div class="nav-container">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container">
+      <div class="navbar-brand">
+        <button mat-icon-button routerLink="/" color="primary" aria-label="Example icon button with a home icon">
+          <fa-icon [icon]="faHouseUser" class="fa-2x"></fa-icon>
+        </button>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
+        (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
+        <mat-toolbar>
+          <button mat-button routerLink="/" color="primary">Inicio</button>
+          <div class="navbar-central">
+            <button mat-button routerLink="/mis-propiedades">Mis propiedades</button>
+            <button mat-button routerLink="/mis-arrendamientos">Mis arrendamientos</button>
+            <button mat-button routerLink="/reporteria">Reporteria</button>
+          </div>
+          <button mat-button routerLink="/propiedades"  color="primary">Publicar Ahora</button>
+        </mat-toolbar>
+        <mat-toolbar>
+          <form class="navbar-central example-form">
+            <mat-form-field style=" margin-bottom: -1.25em" appearance="outline">
+              <mat-label>Buscar</mat-label>
+              <input #textSearch matInput autocomplete="off" (keydown.enter)="buscarPropiedades(textSearch.value)">
+              <fa-icon [icon]="faSearch" class="fa-2x" matSuffix></fa-icon>
+            </mat-form-field>
+          </form>
+        </mat-toolbar>
+
+        <ul class="navbar-nav d-none d-md-block">
+          <!-- Login button: show if NOT authenticated -->
+          <li class="nav-item" *ngIf="auth.loggedIn === false">
+            <button id="qsLoginBtn" class="btn btn-primary btn-margin" (click)="auth.login()">
+              Iniciar sesion
+            </button>
+          </li>
+          <!-- / Login button -->
+
+          <!-- Fullsize dropdown: show if authenticated -->
+          <li class="nav-item dropdown" *ngIf="auth.userProfile$ | async as profile" ngbDropdown>
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="profileDropDown" data-toggle="dropdown" style="padding: 0">
+              <!-- Profile image should be set to the profile picture from the id token -->
+              <img [src]="profile.picture" alt="Profile picture" class="nav-user-profile logo-user"
+                style="width: 40px;filter: grayscale(100%);" />
+            </a>
+            <div class="dropdown-menu dropdown-menu-left" ngbDropdownMenu>
+              <!-- Show the user's full name from the id token here -->
+              <div class="dropdown-header" *ngIf="profile">
+                {{ profile.name }}
+              </div>
+              <a routerLink="/person" class="dropdown-item dropdown-profile" *ngIf="profile">
+                <fa-icon [icon]="faUser" class="mr-3"></fa-icon> Personas
+              </a>
+              <a routerLink="/ubicaciones" class="dropdown-item dropdown-profile" *ngIf="profile">
+                <fa-icon [icon]="faUser" class="mr-3"></fa-icon> Ubicaciones
+              </a>
+              <button (click)="auth.logout()" class="btn btn-link dropdown-item" id="qsLogoutBtn">
+                <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon> Salir
+              </button>
+            </div>
+          </li>
+          <!-- /Fullsize dropdown -->
+        </ul>
+
+        <!-- Responsive login button: show if NOT authenticated -->
+        <ul class="navbar-nav d-md-none" *ngIf="auth.loggedIn === false">
+          <button class="btn btn-primary btn-block" id="qsLoginBtn" (click)="auth.login()">
+            Iniciar sesion
+          </button>
+        </ul>
+        <!-- /Responsive login button -->
+
+        <!-- Responsive profile dropdown: show if authenticated -->
+        <ul class="navbar-nav d-md-none justify-content-between" *ngIf="auth.userProfile$ | async as profile"
+          style="min-height: 170px">
+          <li class="nav-item">
+            <span class="user-info" *ngIf="profile">
+              <!-- Profile image should be set to the profile picture from the id token -->
+              <img alt="Profile picture" class="nav-user-profile d-inline-block rounded-circle mr-3" style="width: 50px"
+                [src]="profile.picture" />
+              <!-- Show the user's full name from the id token here -->
+              <h6 class="d-inline-block">{{ profile.name }}</h6>
+            </span>
+          </li>
+          <li>
+            <fa-icon [icon]="faUser" class="mr-3"></fa-icon>
+            <a routerLink="/profile">Profile</a>
+          </li>
+
+          <li>
+            <fa-icon [icon]="faPowerOff" class="mr-3"></fa-icon>
+            <button class="btn btn-link p-0" id="qsLogoutBtn" (click)="auth.logout()">
+              Salir
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
