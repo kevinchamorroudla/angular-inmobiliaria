@@ -46,7 +46,7 @@
     "codelyzer": "^5.0.0",
     "devextreme-cli": "latest",
     "devextreme-themebuilder": "20.1-stable",
-    "highlight.js": "^9.15.8",
+    "highlight.js": "^10.4.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
